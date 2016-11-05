@@ -20,6 +20,7 @@ class FieldNode: SCNNode {
             chamferRadius: 0.0)
         field.firstMaterial?.diffuse.contents = UIColor.green
         self.geometry = field
+        self.name = "fieldNode"
         self.position = SCNVector3(x: (Float(x)/2), y: 0, z: (Float(y)/2))
 
     }

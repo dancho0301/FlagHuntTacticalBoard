@@ -208,6 +208,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         // フィールドの設定
         fieldNode = FieldNode(x: fieldSizeX, y: fieldSizeY)
         
+        
         ///////////////////////////////////////////////////////////////
         // デバッグ用のポール（あとで消す）
         let testNode1 = SCNNode()
@@ -288,11 +289,33 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
 
     }
     
+    
+    // タップしたらカメラを移動する
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {
-        print("view tapped")
-        
-        
-        
+//        print("view tapped")
+        let p = gestureRecognize.location(in: scnView)
+        let hitResults = scnView.hitTest(p, options: [:])
+        if hitResults.count > 0 {
+            let result = hitResults[0] as SCNHitTestResult
+            
+            
+            var tappedNode = result.node
+            if tappedNode.name == "fieldNode"{
+                print("################################")
+                debugPrint(tappedNode)
+                print("localNormal", result.localNormal)
+                print("localCoordinates", result.localCoordinates)
+                print("worldNormal", result.worldNormal)
+                print("worldCoordinates", result.worldCoordinates)
+                
+                SCNTransaction.begin()
+                SCNTransaction.animationDuration = 1
+                
+                subjectiveCameraNode.position = Utility.addVector3(vector1: result.worldCoordinates, vector2: SCNVector3(x: 0, y: 1.5, z: 0))
+                
+                SCNTransaction.commit()
+            }
+        }
     }
     
     override var shouldAutorotate: Bool {
