@@ -14,9 +14,9 @@ class FieldNode: SCNNode {
         super.init()
 
         let field = SCNBox(
-            width: CGFloat(x + 1),
+            width: CGFloat(x),
             height: 0.1,
-            length: CGFloat(y + 1),
+            length: CGFloat(y),
             chamferRadius: 0.0)
         field.firstMaterial?.diffuse.contents = UIColor.green
         self.geometry = field

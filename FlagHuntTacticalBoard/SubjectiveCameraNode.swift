@@ -38,7 +38,7 @@ class SubjectiveCameraNode: SCNNode {
         
         print("今のカメラの方向", self.eulerAngles)
         
-        setMarker()
+//        setMarker()
     }
     
     required init?(coder aDecoder: NSCoder) {

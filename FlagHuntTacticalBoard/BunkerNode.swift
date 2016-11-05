@@ -17,6 +17,7 @@ class BunkerNode: SCNNode {
     override init() {
         super.init()
         self.geometry = bunkerGeometry
+        self.castsShadow = true
         
         var materials = [SCNMaterial]()
         for i in 1...6 {
@@ -30,6 +31,7 @@ class BunkerNode: SCNNode {
             materials.append(material)
         }
         self.geometry?.materials = materials
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

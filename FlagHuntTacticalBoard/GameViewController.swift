@@ -15,20 +15,21 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     @IBOutlet var scnView: SCNView!
     @IBOutlet var menuBar: UIView!
     @IBOutlet var cursorView: UIView!
-    @IBOutlet var debugArea: UITextView!
 
+    let DEBUG = false
+    
     var scene            : SCNScene!
     
     // カメラ
     var lookOverCameraNode      : SCNNode!
     var subjectiveCameraNode    : SubjectiveCameraNode!
     
-    var cameraPosition = SCNVector3(x: 5, y: 1.4, z: 1)
+    var cameraPosition          = SCNVector3(x: 5, y: 1.4, z: 1)
     
     var cameraXFov              : Float!   = 0
     var cameraYFov              : Float!   = 0
     
-    var cameraAngle    = SCNVector3(x: 0, y: -Float(M_PI), z: 0)
+    var cameraAngle             = SCNVector3(x: 0, y: -Float(M_PI), z: 0)
     
     var testNode                : SCNNode!
     
@@ -41,19 +42,12 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
 
     // デバッグボタン
     @IBAction func btnDebug(_ sender: Any) {
-        let scnView = self.view as! SCNView
         debug()
-//        print("*****************************")
-//        print(scnView.pointOfView?.name ?? "None")
-//        print(lookOverCameraNode)
-//        print(subjectiveCameraNode)
-//        print("*****************************")
     }
     
     @IBAction func btnTest(_ sender: Any) {
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 2
-//        cameraRotateY = cameraRotateY + Float(M_PI_2)
         let _euler = subjectiveCameraNode.eulerAngles
         subjectiveCameraNode.eulerAngles = SCNVector3(x: _euler.x, y: _euler.y + Float(M_PI_2), z: _euler.z)
         SCNTransaction.commit()
@@ -148,7 +142,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
             [6, 5, 1], [6, 15, 1],
             [7, 9, 1], [7, 12, 1],
             [8, 4, 2], [8, 7, 1], [8, 17, 1],
-            [9, 4, 1], [8, 7, 1], [8, 17, 1],
+            [9, 4, 1], [9, 9, 1], [9, 14, 1], [9, 17, 2],
             [10,2, 1], [10,11, 2], [10, 14, 2],
             [11,6, 2], [11, 7, 1], [11, 16, 1], [11, 19, 2],
             [12, 0, 1],[12, 3, 1],[12, 10, 1], [12, 19,1],
@@ -160,13 +154,32 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         
         return bunkerArray
     }
+    
+    func getStartArea() -> Array<Array<Int>>{
+        let startArea = [
+            [4, 21], [4, 22], [4, 23],
+            [5, 21], [5, 22], [5, 23],
+            [6, 21], [6, 22], [6, 23]
+        ]
+        return startArea
+    }
+
+    func getFlagArea() -> Array<Array<Int>>{
+        let flagArea = [
+            [14, 2, 1], [14, 3, 1], [14, 4, 1],
+            [15, 2, 1], [15, 3, 2], [15, 4, 1],
+            [15, 19, 1], [15, 20, 1], [15, 21, 1]
+        ]
+        return flagArea
+    }
+
 
     /////////////////////////////////////
     // バンカーの作成
     /////////////////////////////////////
-    func createBunker (x: Int, y: Int, z: Int) -> SCNNode{
+    func createBunker (x: Float, y: Float, z: Float) -> SCNNode{
         let bunkerNode = BunkerNode()
-        bunkerNode.position = SCNVector3Make(Float(y), Float(z) - 0.2, Float(x))
+        bunkerNode.position = SCNVector3Make(y, z - 0.5, x)
         
         // ２段めのバンカーはオレンジにする
         // 俯瞰視点でわかりやすいように。
@@ -174,9 +187,49 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
             bunkerNode.setUpperBunker()
         }
         
+//        if Int(x) % 5 == 0{
+//            bunkerNode.geometry?.materials[4].diffuse.contents = UIColor.red
+//        }
+        
         return bunkerNode
     }
 
+    func createStartArea (x: Float, y: Float) -> SCNNode{
+        let startNode = SCNNode()
+        let startGeometry = SCNPyramid(width: 1, height: 0.1, length: 1)
+        startGeometry.firstMaterial?.diffuse.contents = UIColor.yellow
+        startNode.geometry = startGeometry
+        startNode.position = SCNVector3Make(y, 0.05, x)
+
+        return startNode
+    }
+
+    func createFlagArea (x: Float, y: Float, z: Float) -> SCNNode{
+        let flagNode = SCNNode()
+        let flagGeometry = SCNPyramid(width: 1, height: 0.1, length: 1)
+        flagGeometry.firstMaterial?.diffuse.contents = UIColor.red
+        flagNode.geometry = flagGeometry
+        flagNode.position = SCNVector3Make(y, 0.05, x)
+        
+        
+        if z == Float(2){
+            let flagNode2 = SCNNode()
+//            let flagGeometry2 = SCNCone(topRadius: CGFloat(0), bottomRadius: CGFloat(1), height: CGFloat(10))
+            let flagGeometry2 = SCNCylinder(radius: 0.1, height: 10)
+            flagGeometry2.firstMaterial?.diffuse.contents = UIColor.red
+            flagNode2.geometry = flagGeometry2
+            flagNode2.opacity = 0.5
+//            flagGeometry.height = 10
+            
+            flagNode.addChildNode(flagNode2)
+        }
+        
+        
+        return flagNode
+    }
+
+    
+    
     /////////////////////////////////////
     // 初期化
     /////////////////////////////////////
@@ -202,7 +255,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         let lightNode = SCNNode()
         lightNode.light = SCNLight()
         lightNode.light!.type = .omni
-        lightNode.position = SCNVector3(x: -5, y: 20, z: 15)
+        lightNode.position = SCNVector3(x: 15, y: 20, z: 15)
         scene.rootNode.addChildNode(lightNode)
         
         // フィールドの設定
@@ -210,25 +263,27 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         
         
         ///////////////////////////////////////////////////////////////
-        // デバッグ用のポール（あとで消す）
-        let testNode1 = SCNNode()
-        let testNode1Geometry = SCNBox(width: 1, height: 10, length: 1, chamferRadius: 0)
-        testNode1Geometry.firstMaterial?.diffuse.contents = UIColor.red
-        testNode1.geometry = testNode1Geometry
-        testNode1.position = SCNVector3(x: 0, y: 0, z: 0)
-        scene.rootNode.addChildNode(testNode1)
-        let testNode2 = SCNNode()
-        let testNode2Geometry = SCNBox(width: 1, height: 10, length: 1, chamferRadius: 0)
-        testNode2Geometry.firstMaterial?.diffuse.contents = UIColor.blue
-        testNode2.geometry = testNode2Geometry
-        testNode2.position = SCNVector3(x: Float(fieldSizeX), y: 0, z: Float(fieldSizeY))
-        scene.rootNode.addChildNode(testNode2)
-        let testNode3 = SCNNode()
-        let testNode3Geometry = SCNBox(width: 1, height: 10, length: 1, chamferRadius: 0)
-        testNode3Geometry.firstMaterial?.diffuse.contents = UIColor.yellow
-        testNode3.geometry = testNode3Geometry
-        testNode3.position = SCNVector3(x: 0, y: 0, z: Float(fieldSizeY))
-        scene.rootNode.addChildNode(testNode3)
+        if DEBUG {
+            // デバッグ用のポール（あとで消す）
+            let testNode1 = SCNNode()
+            let testNode1Geometry = SCNBox(width: 1, height: 10, length: 1, chamferRadius: 0)
+            testNode1Geometry.firstMaterial?.diffuse.contents = UIColor.red
+            testNode1.geometry = testNode1Geometry
+            testNode1.position = SCNVector3(x: 0.5, y: 0, z: 0.5)
+            scene.rootNode.addChildNode(testNode1)
+            let testNode2 = SCNNode()
+            let testNode2Geometry = SCNBox(width: 1, height: 10, length: 1, chamferRadius: 0)
+            testNode2Geometry.firstMaterial?.diffuse.contents = UIColor.blue
+            testNode2.geometry = testNode2Geometry
+            testNode2.position = SCNVector3(x: Float(fieldSizeX), y: 0, z: Float(fieldSizeY))
+            scene.rootNode.addChildNode(testNode2)
+            let testNode3 = SCNNode()
+            let testNode3Geometry = SCNBox(width: 1, height: 10, length: 1, chamferRadius: 0)
+            testNode3Geometry.firstMaterial?.diffuse.contents = UIColor.yellow
+            testNode3.geometry = testNode3Geometry
+            testNode3.position = SCNVector3(x: 0, y: 0, z: Float(fieldSizeY))
+            scene.rootNode.addChildNode(testNode3)
+        }
         ///////////////////////////////////////////////////////////////
         
         // カメラの制約
@@ -241,27 +296,61 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         fieldArray.forEach {
             let bunkerPosition = $0
             scene.rootNode.addChildNode(createBunker(
-                x: bunkerPosition[0],
-                y: fieldSizeX - bunkerPosition[1],
+                x: Float(bunkerPosition[0]) + 0.5,
+                y: Float(fieldSizeX - bunkerPosition[1]) - 0.5,
                 z: 1)
             )
             scene.rootNode.addChildNode(createBunker(
-                x: fieldSizeY - bunkerPosition[0],
-                y: bunkerPosition[1],
+                x: Float(fieldSizeY - bunkerPosition[0]) - 0.5,
+                y: Float(bunkerPosition[1]) + 0.5,
                 z: 1)
             )
             if bunkerPosition[2] == 2{
                 scene.rootNode.addChildNode(createBunker(
-                    x: bunkerPosition[0],
-                    y: fieldSizeX - bunkerPosition[1],
+                    x: Float(bunkerPosition[0]) + 0.5,
+                    y: Float(fieldSizeX - bunkerPosition[1]) - 0.5,
                     z: 2)
                 )
                 scene.rootNode.addChildNode(createBunker(
-                    x: fieldSizeY - bunkerPosition[0],
-                    y: bunkerPosition[1],
+                    x: Float(fieldSizeY - bunkerPosition[0]) - 0.5,
+                    y: Float(bunkerPosition[1]) + 0.5,
                     z: 2)
                 )
             }
+        }
+        
+        // スタートエリア
+        let startAreaArray = getStartArea()
+        startAreaArray.forEach(){
+            let startAreaPosition = $0
+            scene.rootNode.addChildNode(createStartArea(
+                x: Float(startAreaPosition[0]) + 0.5,
+                y: Float(fieldSizeX - startAreaPosition[1]) - 0.5
+                )
+            )
+            scene.rootNode.addChildNode(createStartArea(
+                x: Float(fieldSizeY - startAreaPosition[0]) - 0.5,
+                y: Float(startAreaPosition[1]) + 0.5
+                )
+            )
+        }
+        
+        // フラッグエリア
+        let flagAreaArray = getFlagArea()
+        flagAreaArray.forEach(){
+            let flagAreaPosition = $0
+            scene.rootNode.addChildNode(createFlagArea(
+                x: Float(flagAreaPosition[0]) + 0.5,
+                y: Float(fieldSizeX - flagAreaPosition[1]) - 0.5,
+                z: Float(flagAreaPosition[2])
+                )
+            )
+            scene.rootNode.addChildNode(createFlagArea(
+                x: Float(fieldSizeY - flagAreaPosition[0]) - 0.5,
+                y: Float(flagAreaPosition[1]) + 0.5,
+                z: Float(flagAreaPosition[2])
+                )
+            )
         }
         
         // set the scene to the view
@@ -290,6 +379,8 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         btnLookOverView(UIButton())
 //        btnSubjectiveView(UIButton())
 
+        menuBar.frame = CGRect(x: 0, y: 0, width: 130, height: 60)
+
     }
     
     
@@ -302,7 +393,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
             let result = hitResults[0] as SCNHitTestResult
             
             
-            var tappedNode = result.node
+            let tappedNode = result.node
             if tappedNode.name == "fieldNode"{
                 print("################################")
                 debugPrint(tappedNode)
