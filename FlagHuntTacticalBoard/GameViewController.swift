@@ -14,7 +14,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
 
     @IBOutlet var scnView: SCNView!
     @IBOutlet var menuBar: UIView!
-    @IBOutlet var cursorView: UIView!
+//    @IBOutlet var cursorView: UIView!
 
     let DEBUG = false
     
@@ -24,7 +24,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     var lookOverCameraNode      : SCNNode!
     var subjectiveCameraNode    : SubjectiveCameraNode!
     
-    var cameraPosition          = SCNVector3(x: 5, y: 1.4, z: 1)
+    var cameraPosition          = SCNVector3(x: 2, y: 1.4, z: 6)
     
     var cameraXFov              : Float!   = 0
     var cameraYFov              : Float!   = 0
@@ -39,33 +39,13 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     
     var lockCamera = false
     var defaultFov = 0.0
-
-    // デバッグボタン
-    @IBAction func btnDebug(_ sender: Any) {
-        debug()
-    }
-    
-    @IBAction func btnTest(_ sender: Any) {
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 2
-        let _euler = subjectiveCameraNode.eulerAngles
-        subjectiveCameraNode.eulerAngles = SCNVector3(x: _euler.x, y: _euler.y + Float(M_PI_2), z: _euler.z)
-        SCNTransaction.commit()
-//        debug()
-    }
     
     // 俯瞰ビュー
     @IBAction func btnLookOverView(_ sender: Any) {
-//        print("lookOverButton tapped")
-        
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 0.5
         scnView.pointOfView? = lookOverCameraNode
         scnView.pointOfView?.constraints = [SCNLookAtConstraint(target: fieldNode)]
-//      テスト中は俯瞰でもカメラを操作する
-        menuBar.frame = CGRect(x: 0, y: 0, width: 130, height: 60)
-        cursorView.isHidden = true
-//        debugPrint(lookOverCameraNode)      // DEBUG
         SCNTransaction.commit()
     }
     
@@ -83,49 +63,15 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     
     // 主観ビュー
     @IBAction func btnSubjectiveView(_ sender: Any) {
-//        print("subjectiveButton tapped")
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 0.5
         scnView.pointOfView? = subjectiveCameraNode
-//        debugPrint(subjectiveCameraNode)     // DEBUG
-//        menuBar.frame = CGRect(x: 0, y: 0, width: 130, height: 180)
-//        cursorView.subviews[2].isHidden = false
-        menuBar.frame = CGRect(x: 0, y: 0, width: 130, height: 60)
-        cursorView.isHidden = true
-
         SCNTransaction.commit()
-//        debug()
     }
     
     func initSubjectiveCamera(){
-//        subjectiveCameraNode = SCNNode()
-        
-        
         subjectiveCameraNode = SubjectiveCameraNode(position: cameraPosition, angle: cameraAngle)
-
-        // Debug
-        testNode = SCNNode()
     }
-    
-    
-    /////////////////////////////////////
-    // 矢印ボタンの動作
-    /////////////////////////////////////
-
-    @IBAction func btnAllowUp(_ sender: Any) {
-        subjectiveCameraNode.move(vector: "UP")
-    }
-    @IBAction func btnAllowDown(_ sender: Any) {
-        subjectiveCameraNode.move(vector: "DOWN")
-    }
-
-    @IBAction func btnAllowRight(_ sender: Any) {
-        subjectiveCameraNode.move(vector: "RIGHT")
-    }
-    @IBAction func btnAllowLeft(_ sender: Any) {
-        subjectiveCameraNode.move(vector: "LEFT")
-    }
-    
     
     /////////////////////////////////////
     // バンカー位置の配列を取得する
@@ -186,11 +132,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         if z == 2 {
             bunkerNode.setUpperBunker()
         }
-        
-//        if Int(x) % 5 == 0{
-//            bunkerNode.geometry?.materials[4].diffuse.contents = UIColor.red
-//        }
-        
+
         return bunkerNode
     }
 
@@ -214,17 +156,12 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         
         if z == Float(2){
             let flagNode2 = SCNNode()
-//            let flagGeometry2 = SCNCone(topRadius: CGFloat(0), bottomRadius: CGFloat(1), height: CGFloat(10))
             let flagGeometry2 = SCNCylinder(radius: 0.1, height: 10)
             flagGeometry2.firstMaterial?.diffuse.contents = UIColor.red
             flagNode2.geometry = flagGeometry2
             flagNode2.opacity = 0.5
-//            flagGeometry.height = 10
-            
             flagNode.addChildNode(flagNode2)
         }
-        
-        
         return flagNode
     }
 
