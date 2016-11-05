@@ -105,17 +105,34 @@
                                     <action selector="btnDebug:" destination="BV1-FR-VrT" eventType="touchUpInside" id="MiT-4N-c1S"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="m06-HG-7FF">
+                                <rect key="frame" x="135" y="46" width="240" height="154"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="42j-FL-c3I">
+                                <rect key="frame" x="189" y="20" width="30" height="30"/>
+                                <state key="normal" title="Test"/>
+                                <connections>
+                                    <action selector="btnTest:" destination="BV1-FR-VrT" eventType="touchUpInside" id="IBj-EH-GPD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="J7p-hx-77w" firstAttribute="leading" secondItem="VM7-lb-Orb" secondAttribute="trailing" constant="5" id="5d1-kz-BfM"/>
+                            <constraint firstItem="42j-FL-c3I" firstAttribute="baseline" secondItem="J7p-hx-77w" secondAttribute="baseline" id="68R-sg-CeN"/>
                             <constraint firstItem="J7p-hx-77w" firstAttribute="top" secondItem="VM7-lb-Orb" secondAttribute="top" id="A7v-Bq-LDA"/>
                             <constraint firstItem="VM7-lb-Orb" firstAttribute="top" secondItem="WPF-gV-3kc" secondAttribute="bottom" id="SeG-no-1bv"/>
                             <constraint firstItem="VM7-lb-Orb" firstAttribute="leading" secondItem="qtH-Cl-9Ou" secondAttribute="leading" id="e9F-0v-2zB"/>
+                            <constraint firstItem="42j-FL-c3I" firstAttribute="leading" secondItem="J7p-hx-77w" secondAttribute="trailing" constant="8" symbolic="YES" id="ygv-Va-Mng"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cursorView" destination="gOF-e6-xmY" id="4A5-jj-DGK"/>
+                        <outlet property="debugArea" destination="m06-HG-7FF" id="6bf-kq-ecY"/>
                         <outlet property="menuBar" destination="VM7-lb-Orb" id="UEY-eB-uwe"/>
                         <outlet property="scnView" destination="qtH-Cl-9Ou" id="kC4-Lg-0Bd"/>
                     </connections>
