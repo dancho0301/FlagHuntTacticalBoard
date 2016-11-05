@@ -280,8 +280,11 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
         
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(sender:)))
+        scnView.addGestureRecognizer(panGesture)
         
-        
+//        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(PanCodeViewController.panView(_:)))  //Swift2.2以前
+//        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(PanCodeViewController.panView(sender:)))  //Swift3
         
         ///////////////////////
         btnLookOverView(UIButton())
@@ -317,6 +320,18 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
             }
         }
     }
+    
+    func handlePan(sender: UIPanGestureRecognizer) {
+        let p = sender.translation(in: scnView)
+        
+        let _acceleration: Float = 10000
+        let vec = SCNVector3(x: 0, y: Float(p.x)/_acceleration, z: 0)
+        
+        
+        subjectiveCameraNode.eulerAngles = Utility.addVector3(vector1: subjectiveCameraNode.eulerAngles, vector2: vec)
+        
+    }
+    
     
     override var shouldAutorotate: Bool {
         return true
