@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A57CE5C1DCF643B0075358A /* FlagNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A57CE5B1DCF643B0075358A /* FlagNode.swift */; };
 		5A6D30DD1DCA1146004FF9F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D30DC1DCA1146004FF9F4 /* AppDelegate.swift */; };
 		5A6D30DF1DCA1146004FF9F4 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A6D30DE1DCA1146004FF9F4 /* art.scnassets */; };
 		5A6D30E11DCA1146004FF9F4 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D30E01DCA1146004FF9F4 /* GameViewController.swift */; };
@@ -15,6 +16,8 @@
 		5A6D30E91DCA1146004FF9F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A6D30E71DCA1146004FF9F4 /* LaunchScreen.storyboard */; };
 		5A77C1711DCD9A890022924C /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A77C1701DCD9A890022924C /* Utility.swift */; };
 		5A77C1731DCDFCC30022924C /* StartNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A77C1721DCDFCC30022924C /* StartNode.swift */; };
+		5A77C1751DCE2B570022924C /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A77C1741DCE2B570022924C /* icon.png */; };
+		5A77C1771DCF00BE0022924C /* icon_config.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A77C1761DCF00BE0022924C /* icon_config.png */; };
 		5AA4AD8F1DCAA51800C3D9A3 /* arrow_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4AD8B1DCAA51800C3D9A3 /* arrow_right.png */; };
 		5AA4AD901DCAA51800C3D9A3 /* arrow_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4AD8C1DCAA51800C3D9A3 /* arrow_down.png */; };
 		5AA4AD911DCAA51800C3D9A3 /* arrow_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4AD8D1DCAA51800C3D9A3 /* arrow_left.png */; };
@@ -25,7 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5A6D30D91DCA1146004FF9F4 /* FlagHuntTacticalBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlagHuntTacticalBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A57CE5B1DCF643B0075358A /* FlagNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlagNode.swift; sourceTree = "<group>"; };
+		5A6D30D91DCA1146004FF9F4 /* FlagHuntTacticalTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlagHuntTacticalTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A6D30DC1DCA1146004FF9F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A6D30DE1DCA1146004FF9F4 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		5A6D30E01DCA1146004FF9F4 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +39,8 @@
 		5A6D30EA1DCA1146004FF9F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A77C1701DCD9A890022924C /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utility.swift; path = ../Utility.swift; sourceTree = "<group>"; };
 		5A77C1721DCDFCC30022924C /* StartNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartNode.swift; sourceTree = "<group>"; };
+		5A77C1741DCE2B570022924C /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		5A77C1761DCF00BE0022924C /* icon_config.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_config.png; sourceTree = "<group>"; };
 		5AA4AD8B1DCAA51800C3D9A3 /* arrow_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_right.png; sourceTree = "<group>"; };
 		5AA4AD8C1DCAA51800C3D9A3 /* arrow_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_down.png; sourceTree = "<group>"; };
 		5AA4AD8D1DCAA51800C3D9A3 /* arrow_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_left.png; sourceTree = "<group>"; };
@@ -58,7 +64,7 @@
 		5A6D30D01DCA1146004FF9F4 = {
 			isa = PBXGroup;
 			children = (
-				5A6D30DB1DCA1146004FF9F4 /* FlagHuntTacticalBoard */,
+				5A6D30DB1DCA1146004FF9F4 /* FlagHuntTacticalTool */,
 				5A6D30DA1DCA1146004FF9F4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,12 +72,12 @@
 		5A6D30DA1DCA1146004FF9F4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5A6D30D91DCA1146004FF9F4 /* FlagHuntTacticalBoard.app */,
+				5A6D30D91DCA1146004FF9F4 /* FlagHuntTacticalTool.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5A6D30DB1DCA1146004FF9F4 /* FlagHuntTacticalBoard */ = {
+		5A6D30DB1DCA1146004FF9F4 /* FlagHuntTacticalTool */ = {
 			isa = PBXGroup;
 			children = (
 				5AA4AD931DCAA52400C3D9A3 /* images */,
@@ -82,18 +88,22 @@
 				5AC72AEC1DCD7CF40095267A /* SubjectiveCameraNode.swift */,
 				5AC72AE81DCD65620095267A /* BunkerNode.swift */,
 				5A77C1721DCDFCC30022924C /* StartNode.swift */,
+				5A57CE5B1DCF643B0075358A /* FlagNode.swift */,
 				5A6D30E21DCA1146004FF9F4 /* Main.storyboard */,
 				5A6D30E51DCA1146004FF9F4 /* Assets.xcassets */,
 				5A6D30E71DCA1146004FF9F4 /* LaunchScreen.storyboard */,
 				5A6D30EA1DCA1146004FF9F4 /* Info.plist */,
 				5A77C1701DCD9A890022924C /* Utility.swift */,
 			);
+			name = FlagHuntTacticalTool;
 			path = FlagHuntTacticalBoard;
 			sourceTree = "<group>";
 		};
 		5AA4AD931DCAA52400C3D9A3 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				5A77C1761DCF00BE0022924C /* icon_config.png */,
+				5A77C1741DCE2B570022924C /* icon.png */,
 				5AA4AD8B1DCAA51800C3D9A3 /* arrow_right.png */,
 				5AA4AD8C1DCAA51800C3D9A3 /* arrow_down.png */,
 				5AA4AD8D1DCAA51800C3D9A3 /* arrow_left.png */,
@@ -105,9 +115,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5A6D30D81DCA1146004FF9F4 /* FlagHuntTacticalBoard */ = {
+		5A6D30D81DCA1146004FF9F4 /* FlagHuntTacticalTool */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5A6D30ED1DCA1146004FF9F4 /* Build configuration list for PBXNativeTarget "FlagHuntTacticalBoard" */;
+			buildConfigurationList = 5A6D30ED1DCA1146004FF9F4 /* Build configuration list for PBXNativeTarget "FlagHuntTacticalTool" */;
 			buildPhases = (
 				5A6D30D51DCA1146004FF9F4 /* Sources */,
 				5A6D30D61DCA1146004FF9F4 /* Frameworks */,
@@ -117,9 +127,9 @@
 			);
 			dependencies = (
 			);
-			name = FlagHuntTacticalBoard;
+			name = FlagHuntTacticalTool;
 			productName = FlagHuntTacticalBoard;
-			productReference = 5A6D30D91DCA1146004FF9F4 /* FlagHuntTacticalBoard.app */;
+			productReference = 5A6D30D91DCA1146004FF9F4 /* FlagHuntTacticalTool.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -134,12 +144,12 @@
 				TargetAttributes = {
 					5A6D30D81DCA1146004FF9F4 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 6549AY6J4G;
+						DevelopmentTeam = 9WY78V6VJA;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 5A6D30D41DCA1146004FF9F4 /* Build configuration list for PBXProject "FlagHuntTacticalBoard" */;
+			buildConfigurationList = 5A6D30D41DCA1146004FF9F4 /* Build configuration list for PBXProject "FlagHuntTacticalTool" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -152,7 +162,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5A6D30D81DCA1146004FF9F4 /* FlagHuntTacticalBoard */,
+				5A6D30D81DCA1146004FF9F4 /* FlagHuntTacticalTool */,
 			);
 		};
 /* End PBXProject section */
@@ -164,6 +174,8 @@
 			files = (
 				5A6D30DF1DCA1146004FF9F4 /* art.scnassets in Resources */,
 				5AA4AD921DCAA51800C3D9A3 /* arrow_up.png in Resources */,
+				5A77C1771DCF00BE0022924C /* icon_config.png in Resources */,
+				5A77C1751DCE2B570022924C /* icon.png in Resources */,
 				5AA4AD901DCAA51800C3D9A3 /* arrow_down.png in Resources */,
 				5AA4AD8F1DCAA51800C3D9A3 /* arrow_right.png in Resources */,
 				5A6D30E91DCA1146004FF9F4 /* LaunchScreen.storyboard in Resources */,
@@ -181,6 +193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AC72AEB1DCD77690095267A /* FieldNode.swift in Sources */,
+				5A57CE5C1DCF643B0075358A /* FlagNode.swift in Sources */,
 				5AC72AE91DCD65620095267A /* BunkerNode.swift in Sources */,
 				5A77C1711DCD9A890022924C /* Utility.swift in Sources */,
 				5A6D30E11DCA1146004FF9F4 /* GameViewController.swift in Sources */,
@@ -309,11 +322,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6549AY6J4G;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = 9WY78V6VJA;
 				INFOPLIST_FILE = FlagHuntTacticalBoard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jp.dancho.FlagHuntTacticalBoard;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.dancho.FlagHuntTacticalTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -323,11 +337,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6549AY6J4G;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = 9WY78V6VJA;
 				INFOPLIST_FILE = FlagHuntTacticalBoard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jp.dancho.FlagHuntTacticalBoard;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.dancho.FlagHuntTacticalTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -336,7 +351,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5A6D30D41DCA1146004FF9F4 /* Build configuration list for PBXProject "FlagHuntTacticalBoard" */ = {
+		5A6D30D41DCA1146004FF9F4 /* Build configuration list for PBXProject "FlagHuntTacticalTool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5A6D30EB1DCA1146004FF9F4 /* Debug */,
@@ -345,7 +360,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5A6D30ED1DCA1146004FF9F4 /* Build configuration list for PBXNativeTarget "FlagHuntTacticalBoard" */ = {
+		5A6D30ED1DCA1146004FF9F4 /* Build configuration list for PBXNativeTarget "FlagHuntTacticalTool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5A6D30EE1DCA1146004FF9F4 /* Debug */,

@@ -14,6 +14,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
 
     @IBOutlet var scnView: SCNView!
     @IBOutlet var menuBar: UIView!
+    @IBOutlet var lblDebug: UILabel!
 //    @IBOutlet var cursorView: UIView!
 
     let DEBUG = false
@@ -42,11 +43,13 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     
     // 俯瞰ビュー
     @IBAction func btnLookOverView(_ sender: Any) {
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 0.5
-        scnView.pointOfView? = lookOverCameraNode
-        scnView.pointOfView?.constraints = [SCNLookAtConstraint(target: fieldNode)]
-        SCNTransaction.commit()
+        if scnView.pointOfView?.name != "lookOverCameraNode" {
+            SCNTransaction.begin()
+            SCNTransaction.animationDuration = 0.5
+            scnView.pointOfView? = lookOverCameraNode
+            scnView.pointOfView?.constraints = [SCNLookAtConstraint(target: fieldNode)]
+            SCNTransaction.commit()
+        }
     }
     
     // 俯瞰視点カメラの作成
@@ -73,10 +76,10 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         subjectiveCameraNode = SubjectiveCameraNode(position: cameraPosition, angle: cameraAngle)
     }
     
-    /////////////////////////////////////
-    // バンカー位置の配列を取得する
-    // いずれは設定可能にするため、関数で定義
-    /////////////////////////////////////
+    /************************************
+     * バンカー位置の配列を取得する
+     * いずれは設定可能にするため、関数で定義
+     ************************************/
     func getBunkerData() -> Array<Array<Int>>{
         let bunkerArray = [
             [0, 6, 1],
@@ -119,10 +122,12 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         return flagArea
     }
 
-
-    /////////////////////////////////////
-    // バンカーの作成
-    /////////////////////////////////////
+    /**
+     バンカーの作成
+     - parameter x: X座標
+     - parameter y: Y座標
+     - parameter z: Z座標
+     */
     func createBunker (x: Float, y: Float, z: Float) -> SCNNode{
         let bunkerNode = BunkerNode()
         bunkerNode.position = SCNVector3Make(y, z - 0.5, x)
@@ -136,36 +141,33 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         return bunkerNode
     }
 
+    
+    /**
+     スタートエリアの作成（黄色）
+     - parameter x: X座標
+     - parameter y: Y座標
+     */
     func createStartArea (x: Float, y: Float) -> SCNNode{
-        let startNode = SCNNode()
-        let startGeometry = SCNPyramid(width: 1, height: 0.1, length: 1)
-        startGeometry.firstMaterial?.diffuse.contents = UIColor.yellow
-        startNode.geometry = startGeometry
-        startNode.position = SCNVector3Make(y, 0.05, x)
+        let startNode = StartNode()
+        startNode.position = SCNVector3(x: y, y: 0.05, z: x)
 
         return startNode
     }
 
+    /**
+     フラッグエリアの作成
+     - parameter x: X座標
+     - parameter y: Y座標
+     - parameter z: Z座標
+     */
     func createFlagArea (x: Float, y: Float, z: Float) -> SCNNode{
-        let flagNode = SCNNode()
-        let flagGeometry = SCNPyramid(width: 1, height: 0.1, length: 1)
-        flagGeometry.firstMaterial?.diffuse.contents = UIColor.red
-        flagNode.geometry = flagGeometry
-        flagNode.position = SCNVector3Make(y, 0.05, x)
-        
-        
-        if z == Float(2){
-            let flagNode2 = SCNNode()
-            let flagGeometry2 = SCNCylinder(radius: 0.1, height: 10)
-            flagGeometry2.firstMaterial?.diffuse.contents = UIColor.red
-            flagNode2.geometry = flagGeometry2
-            flagNode2.opacity = 0.5
-            flagNode.addChildNode(flagNode2)
-        }
-        return flagNode
-    }
+        let flagNode = FlagNode(
+            position: SCNVector3(x: y, y: 0.05, z: x),
+            flag: (z == Float(2)))
 
-    
+        return flagNode
+
+    }
     
     /////////////////////////////////////
     // 初期化
@@ -197,7 +199,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         
         // フィールドの設定
         fieldNode = FieldNode(x: fieldSizeX, y: fieldSizeY)
-        
+        scene.rootNode.addChildNode(fieldNode)
         
         ///////////////////////////////////////////////////////////////
         if DEBUG {
@@ -226,7 +228,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         // カメラの制約
         let lookAtConstraint = SCNLookAtConstraint(target: fieldNode)
         scnView.pointOfView?.constraints = [lookAtConstraint]
-        scene.rootNode.addChildNode(fieldNode)
+
         
         // バンカーの作成
         let fieldArray = getBunkerData()
@@ -260,6 +262,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         let startAreaArray = getStartArea()
         startAreaArray.forEach(){
             let startAreaPosition = $0
+
             scene.rootNode.addChildNode(createStartArea(
                 x: Float(startAreaPosition[0]) + 0.5,
                 y: Float(fieldSizeX - startAreaPosition[1]) - 0.5
@@ -309,10 +312,6 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(sender:)))
         scnView.addGestureRecognizer(panGesture)
         
-//        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(PanCodeViewController.panView(_:)))  //Swift2.2以前
-//        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(PanCodeViewController.panView(sender:)))  //Swift3
-        
-        ///////////////////////
         btnLookOverView(UIButton())
 //        btnSubjectiveView(UIButton())
 
@@ -354,9 +353,15 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         
         let _acceleration: Float = 10000
         let vec = SCNVector3(x: 0, y: Float(p.x)/_acceleration, z: 0)
-        
+        let pos = SCNVector3(x: 0, y: Float(p.y)/_acceleration, z: 0)
         
         subjectiveCameraNode.eulerAngles = Utility.addVector3(vector1: subjectiveCameraNode.eulerAngles, vector2: vec)
+        subjectiveCameraNode.position = Utility.addVector3(vector1: subjectiveCameraNode.position, vector2: pos)
+        if subjectiveCameraNode.position.y < 0.2 {
+            subjectiveCameraNode.position.y = 0.2
+        }
+        
+        lblDebug.text = String(describing: subjectiveCameraNode.position)
         
     }
     

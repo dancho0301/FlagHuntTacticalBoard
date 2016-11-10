@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5A6D30D81DCA1146004FF9F4"
-               BuildableName = "FlagHuntTacticalBoard.app"
-               BlueprintName = "FlagHuntTacticalBoard"
-               ReferencedContainer = "container:FlagHuntTacticalBoard.xcodeproj">
+               BuildableName = "FlagHuntTacticalTool.app"
+               BlueprintName = "FlagHuntTacticalTool"
+               ReferencedContainer = "container:FlagHuntTacticalTool.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5A6D30D81DCA1146004FF9F4"
-            BuildableName = "FlagHuntTacticalBoard.app"
-            BlueprintName = "FlagHuntTacticalBoard"
-            ReferencedContainer = "container:FlagHuntTacticalBoard.xcodeproj">
+            BuildableName = "FlagHuntTacticalTool.app"
+            BlueprintName = "FlagHuntTacticalTool"
+            ReferencedContainer = "container:FlagHuntTacticalTool.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5A6D30D81DCA1146004FF9F4"
-            BuildableName = "FlagHuntTacticalBoard.app"
-            BlueprintName = "FlagHuntTacticalBoard"
-            ReferencedContainer = "container:FlagHuntTacticalBoard.xcodeproj">
+            BuildableName = "FlagHuntTacticalTool.app"
+            BlueprintName = "FlagHuntTacticalTool"
+            ReferencedContainer = "container:FlagHuntTacticalTool.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5A6D30D81DCA1146004FF9F4"
-            BuildableName = "FlagHuntTacticalBoard.app"
-            BlueprintName = "FlagHuntTacticalBoard"
-            ReferencedContainer = "container:FlagHuntTacticalBoard.xcodeproj">
+            BuildableName = "FlagHuntTacticalTool.app"
+            BlueprintName = "FlagHuntTacticalTool"
+            ReferencedContainer = "container:FlagHuntTacticalTool.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
