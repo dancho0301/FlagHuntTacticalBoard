@@ -56,7 +56,7 @@ class SubjectiveCameraNode: SCNNode {
         markGeometry.firstMaterial?.diffuse.contents = UIColor.purple
         markerNode.geometry = markGeometry
 //        markerNode.position = self.position
-        let markerNodeEulerAngle = SCNVector3FromFloat3(SCNVector3ToFloat3(self.eulerAngles) + vector3(Float(-M_PI_2), 0, 0))
+        let markerNodeEulerAngle = SCNVector3FromFloat3(SCNVector3ToFloat3(self.eulerAngles) + vector3(Float(-Double.pi/2), 0, 0))
         markerNode.eulerAngles = markerNodeEulerAngle
         
 //        markerNode.eulerAngles = self.eulerAngles
@@ -76,7 +76,7 @@ class SubjectiveCameraNode: SCNNode {
         var cameraRadian = Float()
         switch vector {
         case "UP":
-            cameraRadian = Utility.calcRadian(radian: self.eulerAngles.y + Float(M_PI_2))
+            cameraRadian = Utility.calcRadian(radian: self.eulerAngles.y + Float(Double.pi/2))
         case "DOWN":
             cameraRadian = Utility.calcRadian(radian: self.eulerAngles.y + Float.pi)
         case "LEFT":
@@ -88,7 +88,7 @@ class SubjectiveCameraNode: SCNNode {
         }
 
         // （参考用：カメラの角度）
-        let cameraKakudo = fabs(cameraRadian * 180 / Float(M_PI)).truncatingRemainder(dividingBy: 360)
+        let cameraKakudo = fabs(cameraRadian * 180 / Float(Double.pi)).truncatingRemainder(dividingBy: 360)
         print("進行方向", cameraRadian, cameraKakudo, Utility.calcRadian(radian: cameraRadian))
         
         let _cameraVector       = SCNVector3(x: cos(cameraRadian), y: 0, z: sin(cameraRadian))
@@ -100,7 +100,7 @@ class SubjectiveCameraNode: SCNNode {
         SCNTransaction.animationDuration = 0.5
         
         self.position = Utility.addVector3(vector1: self.position, vector2: _cameraVector)
-        markerNode.eulerAngles = Utility.addVector3(vector1: self.eulerAngles, vector2: SCNVector3(Float(-M_PI_2), 0, 0))
+        markerNode.eulerAngles = Utility.addVector3(vector1: self.eulerAngles, vector2: SCNVector3(Float(-Double.pi/2), 0, 0))
 
         print("カメラの移動先", self.position)
 

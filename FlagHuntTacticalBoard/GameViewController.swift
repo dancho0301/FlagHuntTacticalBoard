@@ -30,7 +30,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     var cameraXFov              : Float!   = 0
     var cameraYFov              : Float!   = 0
     
-    var cameraAngle             = SCNVector3(x: 0, y: -Float(M_PI), z: 0)
+    var cameraAngle             = SCNVector3(x: 0, y: -Float(Double.pi), z: 0)
     
     var testNode                : SCNNode!
     
@@ -222,6 +222,8 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
             testNode3.geometry = testNode3Geometry
             testNode3.position = SCNVector3(x: 0, y: 0, z: Float(fieldSizeY))
             scene.rootNode.addChildNode(testNode3)
+        } else {
+            lblDebug.isHidden = true
         }
         ///////////////////////////////////////////////////////////////
         

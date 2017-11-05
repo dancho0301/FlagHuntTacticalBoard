@@ -18,7 +18,7 @@ class Utility: NSObject {
 //    // ラジアン角度がマイナスだったら、正の数に変換する
     static func calcRadian(radian: Float) -> Float{
         if radian < 0 {
-            return (2 * Float(M_PI)) - fabs(radian).truncatingRemainder(dividingBy: 2 * Float(M_PI))
+            return (2 * Float(Double.pi)) - fabs(radian).truncatingRemainder(dividingBy: 2 * Float(Double.pi))
             
 //            let cameraKakudo = fabs(cameraRadian * 180 / Float(M_PI)).truncatingRemainder(dividingBy: 360)
 
